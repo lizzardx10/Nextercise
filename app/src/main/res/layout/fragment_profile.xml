@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.notifications.NotificationsFragment">
+
+    <EditText
+        android:id="@+id/changePasswordEt"
+        android:layout_width="373dp"
+        android:layout_height="61dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="145dp" />
+
+    <EditText
+        android:id="@+id/changeEmailEt"
+        android:layout_width="374dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="99dp" />
+
+    <EditText
+        android:id="@+id/changeUsernameEt"
+        android:layout_width="373dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="60dp" />
+
+    <TextView
+        android:id="@+id/profileInfoEt"
+        android:layout_width="373dp"
+        android:layout_height="34dp"
+        android:text="Profile Information"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/changeProfInfoBtn"
+        android:layout_width="176dp"
+        android:layout_height="38dp"
+        android:text="Change Info"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="214dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommend exercises based on saved exercises lists?"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="311dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="373dp"
+        android:layout_height="53dp"
+        android:text="Allow saved exercises to be recommended?"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="373dp"
+        android:layout_height="46dp"
+        android:text="Recommend exercises based on previous searches?"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="359dp" />
+
+    <Button
+        android:id="@+id/changePrefBtn"
+        android:layout_width="223dp"
+        android:layout_height="39dp"
+        android:text="Change Preferences"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="458dp" />
+
+    <TextView
+        android:id="@+id/profilePrefEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile Preferences"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="269dp" />
+
+    <TextView
+        android:id="@+id/savedListsEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SavedLists"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="515dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="370dp"
+        android:layout_height="158dp"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="568dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
