@@ -3,109 +3,159 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:layout_height="match_parent">
+<!--    tools:context=".ui.notifications.NotificationsFragment">-->
 
     <EditText
         android:id="@+id/changePasswordEt"
         android:layout_width="373dp"
         android:layout_height="61dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="145dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeEmailEt" />
 
     <EditText
         android:id="@+id/changeEmailEt"
         android:layout_width="374dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="99dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeUsernameEt" />
 
     <EditText
         android:id="@+id/changeUsernameEt"
         android:layout_width="373dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="60dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileInfoEt" />
 
     <TextView
         android:id="@+id/profileInfoEt"
         android:layout_width="373dp"
         android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Profile Information"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/changeProfInfoBtn"
         android:layout_width="176dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="3dp"
         android:text="Change Info"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="214dp" />
+        app:layout_constraintBottom_toTopOf="@+id/profilePrefEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changePasswordEt" />
 
     <CheckBox
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:text="Recommend exercises based on saved exercises lists?"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="311dp" />
+        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePrefEt" />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="373dp"
         android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
         android:text="Allow saved exercises to be recommended?"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="405dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
     <CheckBox
         android:id="@+id/checkBox2"
         android:layout_width="373dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Recommend exercises based on previous searches?"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="359dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
 
     <Button
         android:id="@+id/changePrefBtn"
         android:layout_width="223dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="94dp"
         android:text="Change Preferences"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="458dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
     <TextView
         android:id="@+id/profilePrefEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="10dp"
         android:text="Profile Preferences"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="269dp" />
+        app:layout_constraintBottom_toTopOf="@+id/checkBox1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeProfInfoBtn" />
 
     <TextView
         android:id="@+id/savedListsEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="21dp"
         android:text="SavedLists"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="515dp" />
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changePrefBtn" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="370dp"
         android:layout_height="158dp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="568dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,28 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    android:layout_height="match_parent">
+<!--    tools:context=".ui.search.SearchFragment">-->
 
     <Button
         android:id="@+id/searchBtn"
         android:layout_width="97dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
         android:text="Search"
-        tools:layout_editor_absoluteX="269dp"
-        tools:layout_editor_absoluteY="29dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toEndOf="@+id/searchEt"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/searchEt"
         android:layout_width="227dp"
         android:layout_height="25dp"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Search for an exercise..." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="409dp"
         android:layout_height="661dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="69dp" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

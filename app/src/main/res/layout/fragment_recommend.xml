@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="40dp"
+        android:text="Skip Exercise"
+        app:layout_constraintEnd_toStartOf="@+id/btnView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etExcDescription" />
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="25dp"
+        android:text="View Exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSkip"
+        app:layout_constraintTop_toBottomOf="@+id/etExcDescription" />
+
+    <ImageView
+        android:id="@+id/ivExerciseImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:src="@android:drawable/ic_menu_myplaces"
+        app:layout_constraintBottom_toTopOf="@+id/etExcDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etExercise" />
+
+    <TextView
+        android:id="@+id/etExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="133dp"
+        android:text="Push-Ups"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/etExcDescription"
+        android:layout_width="382dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="124dp"
+        android:text="A push-up is a common calisthenics exercise beginning from the prone position. By raising and lowering the body using the arms, push-ups exercise the pectoral muscles, triceps, and anterior deltoids, with ancillary benefits to the rest of the deltoids, serratus anterior, coracobrachialis and the midsection as a whole."
+        app:layout_constraintBottom_toTopOf="@+id/btnSkip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivExerciseImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
