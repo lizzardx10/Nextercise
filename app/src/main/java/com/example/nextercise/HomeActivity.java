@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.nextercise.ui.home.HomeFragment;
+import com.example.nextercise.ui.Fragments.ProfileFragment;
+import com.example.nextercise.ui.Fragments.RecommendFragment;
+import com.example.nextercise.ui.Fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -30,18 +32,18 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.navigation_search:
                     Toast.makeText(HomeActivity.this, "Search!", Toast.LENGTH_SHORT).show();
-                    fragment = new HomeFragment();
+                    fragment = new SearchFragment();
                     break;
                 case R.id.navigation_profile:
                     Toast.makeText(HomeActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
-                    fragment = new HomeFragment();
+                    fragment = new ProfileFragment();
                     break;
 
                 case R.id.navigation_recommend:
                 default:
 
                     Toast.makeText(HomeActivity.this, "Home!", Toast.LENGTH_SHORT).show();
-                    fragment = new HomeFragment();
+                    fragment = new RecommendFragment();
                     break;
             }
             fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

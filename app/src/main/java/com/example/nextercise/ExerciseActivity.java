@@ -22,7 +22,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
 
         etExerciseName = findViewById(R.id.etExerciseName);
-        ivExerciseImage = findViewById(R.id.ivExerciseImage);
+        ivExerciseImage = findViewById(R.id.ivExcImage);
         etExerciseDescription = findViewById(R.id.etExcDescription);
         etExerciseInstructions = findViewById(R.id.etExerciseInstructions);
 

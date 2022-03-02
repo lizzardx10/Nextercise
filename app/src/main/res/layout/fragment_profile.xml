@@ -7,7 +7,7 @@
 <!--    tools:context=".ui.notifications.NotificationsFragment">-->
 
     <EditText
-        android:id="@+id/changePasswordEt"
+        android:id="@+id/etChangePassword"
         android:layout_width="373dp"
         android:layout_height="61dp"
         android:layout_marginStart="16dp"
@@ -18,10 +18,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeEmailEt" />
+        app:layout_constraintTop_toBottomOf="@+id/etChangeEmail" />
 
     <EditText
-        android:id="@+id/changeEmailEt"
+        android:id="@+id/etChangeEmail"
         android:layout_width="374dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -32,10 +32,10 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeUsernameEt" />
+        app:layout_constraintTop_toBottomOf="@+id/etChangeUsername" />
 
     <EditText
-        android:id="@+id/changeUsernameEt"
+        android:id="@+id/etChangeUsername"
         android:layout_width="373dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -46,14 +46,13 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileInfoEt" />
+        app:layout_constraintTop_toBottomOf="@+id/etProfileInfo" />
 
     <TextView
-        android:id="@+id/profileInfoEt"
+        android:id="@+id/etProfileInfo"
         android:layout_width="373dp"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Profile Information"
         android:textSize="24sp"
@@ -62,100 +61,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/changeProfInfoBtn"
+        android:id="@+id/btnChangeProfInfo"
         android:layout_width="176dp"
         android:layout_height="48dp"
         android:layout_marginStart="117dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="118dp"
-        android:layout_marginBottom="3dp"
         android:text="Change Info"
-        app:layout_constraintBottom_toTopOf="@+id/profilePrefEt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changePasswordEt" />
+        app:layout_constraintTop_toBottomOf="@+id/etChangePassword" />
 
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
-        android:text="Recommend exercises based on saved exercises lists?"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilePrefEt" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="373dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="16dp"
-        android:text="Allow saved exercises to be recommended?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="373dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Recommend exercises based on previous searches?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
-
-    <Button
-        android:id="@+id/changePrefBtn"
-        android:layout_width="223dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="94dp"
-        android:text="Change Preferences"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
-
-    <TextView
-        android:id="@+id/profilePrefEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="10dp"
-        android:text="Profile Preferences"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeProfInfoBtn" />
-
-    <TextView
-        android:id="@+id/savedListsEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="21dp"
-        android:text="SavedLists"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changePrefBtn" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="370dp"
-        android:layout_height="158dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

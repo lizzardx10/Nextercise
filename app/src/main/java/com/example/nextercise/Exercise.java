@@ -11,6 +11,7 @@ public class Exercise extends ParseObject {
     public static final String KEY_EXERCISEIMAGE = "exerciseImg";
     public static final String KEY_VIDEOURL = "videoURL";
     public static final String KEY_EXERCISEINSTRUCTIONS = "exerciseInstructions";
+    public static final String KEY_EXERCISEID = "exerciseId";
 
     public String getExerciseName() {
         return getString(KEY_EXERCISENAME);
@@ -22,9 +23,7 @@ public class Exercise extends ParseObject {
     public String getExerciseDescription() {
         return getString(KEY_EXERCISEDESCRIPTION);
     }
-    public void setExerciseDescription(String exerciseDescription) {
-        put(KEY_EXERCISEDESCRIPTION, exerciseDescription);
-    }
+    public void setExerciseDescription(String exerciseDescription) { put(KEY_EXERCISEDESCRIPTION, exerciseDescription);}
 
     public ParseFile getExerciseImage() {
         return getParseFile(KEY_EXERCISEIMAGE);
@@ -43,7 +42,11 @@ public class Exercise extends ParseObject {
     public String getExerciseInstructions() {
         return getString(KEY_EXERCISEINSTRUCTIONS);
     }
-    public void setExerciseInstructions(String exerciseInstructions) {
-        put(KEY_EXERCISEINSTRUCTIONS, exerciseInstructions);
+    public void setExerciseInstructions(String exerciseInstructions) { put(KEY_EXERCISEINSTRUCTIONS, exerciseInstructions); }
+
+    public String getExerciseId() {
+        return getString(KEY_EXERCISEID);
     }
+    public void setExerciseId(String exerciseId) { put(KEY_EXERCISEID, exerciseId); }
+
 }
