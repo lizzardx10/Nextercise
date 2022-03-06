@@ -6,12 +6,20 @@ import com.parse.ParseObject;
 
 @ParseClassName("Exercise")
 public class Exercise extends ParseObject {
+    public static final String KEY_OBJECTID = "objectId";
     public static final String KEY_EXERCISENAME = "exerciseName";
     public static final String KEY_EXERCISEDESCRIPTION = "exerciseDescription";
     public static final String KEY_EXERCISEIMAGE = "exerciseImg";
     public static final String KEY_VIDEOURL = "videoURL";
     public static final String KEY_EXERCISEINSTRUCTIONS = "exerciseInstructions";
     public static final String KEY_EXERCISEID = "exerciseId";
+
+    public String getObjectId() {
+        return getString(KEY_OBJECTID);
+    }
+    public void setObjectId(String objectId) {
+        put(KEY_OBJECTID, objectId);
+    }
 
     public String getExerciseName() {
         return getString(KEY_EXERCISENAME);

@@ -5,7 +5,7 @@
     android:id="@+id/clScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.Fragments.RecommendFragment">
 
     <Button
         android:id="@+id/btnSkip"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etExcDescription" />
 
-    <ImageView
+    <com.parse.ui.widget.ParseImageView
         android:id="@+id/ivExcImage"
         android:layout_width="250dp"
         android:layout_height="250dp"

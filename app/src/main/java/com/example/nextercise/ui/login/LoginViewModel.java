@@ -1,15 +1,15 @@
 package com.example.nextercise.ui.login;
 
+import android.util.Patterns;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.util.Patterns;
-
+import com.example.nextercise.R;
 import com.example.nextercise.data.LoginRepository;
 import com.example.nextercise.data.Result;
 import com.example.nextercise.data.model.LoggedInUser;
-import com.example.nextercise.R;
 
 public class LoginViewModel extends ViewModel {
 

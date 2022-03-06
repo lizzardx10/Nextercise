@@ -1,5 +1,7 @@
 package com.example.nextercise.ui.Fragments;
 
+import static com.parse.Parse.getApplicationContext;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,14 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
 import com.example.nextercise.R;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.io.File;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RecommendFragment extends Fragment {
     public static final String TAG = "RecommendFragment";
@@ -25,11 +32,15 @@ public class RecommendFragment extends Fragment {
     private TextView etExcName;
     private ImageView ivExcImage;
     private TextView etExcDescription;
+
     private Button btnSkip;
     private Button btnView;
 
     private File imageFile;
-//    public String photoFileName =
+
+    public class QueryCount{
+        private int count;
+    }
 
     // onCreateView called when Fragment should create its View object hierarchy, dynamically or via XML layout inflation
     @Override
@@ -37,6 +48,7 @@ public class RecommendFragment extends Fragment {
     // inflate the layout for this fragment, defines xml file for fragment
         return inflater.inflate(R.layout.fragment_recommend, container, false);
     }
+
     // onViewCreated triggered soon after onCreateView()
     // setup occurs here, E.g., view lookups & attaching view listeners
     @Override
@@ -53,28 +65,31 @@ public class RecommendFragment extends Fragment {
         queryExercise();
     }
     private void queryExercise() {
-        ParseQuery<Exercise> query = ParseQuery.getQuery(Exercise.class);
-        // query.include(Exercise.KEY_EXERCISEID);
-        query.getInBackground("5O6Dnkrp77", (exercise, e) -> {
-            if (e == null) {
-                Log.i(TAG, "Exercise: " + exercise.getExerciseName() + ", exercise desc: " + exercise.getExerciseDescription());
-            } else {
-                Log.e(TAG, "issue with retrieving exercise");
+        ParseQuery<Exercise> query = ParseQuery.getQuery("Exercise");
+        QueryCount qCount = new QueryCount();
+        // call count asynchronously
+        try {
+            int count  =  query.count();
+            qCount.count = count;
+            Toast.makeText(getApplicationContext(), "Count : "+count, Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int randomNum = ThreadLocalRandom.current().nextInt(0, qCount.count);
+        query.whereEqualTo("exerciseId", randomNum);
+        // Execute the find asynchronously
+        query.getFirstInBackground(new GetCallback<Exercise>() {
+            public void done(Exercise recommended, ParseException e) {
+                // you want to do a check on the ParseException here as well.
+                if (recommended == null) {
+                    Log.d("nothing found", "let's go ahead and create a new object.");
+                } else {
+                    etExcName.setText(recommended.getString("exerciseName"));
+                    Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExcImage);
+                    etExcDescription.setText(recommended.getString("exerciseDescription"));
+                    //Log.d("points found", points + "");
+                }
             }
-
         });
-//        query.findInBackground(new FindCallback Exercise {
-//            @Override
-//            public void done(List<Exercise> exercises, ParseException e) {
-//                if (e != null) {
-//                    Log.e(TAG, "issue with retrieving exercise");
-//                    return;
-//                }
-//                for (Exercise exercise : exercises) {
-//                    Log.i(TAG, "Exercise: " + exercise.getExerciseName() + ", exercise desc: " + exercise.getExerciseDescription());
-//                }
-//            }
-//        });
     }
-
 }

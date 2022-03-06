@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_recommend:
                 default:
 
-                    Toast.makeText(HomeActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(HomeActivity.this, "Recommended!", Toast.LENGTH_SHORT).show();
                     fragment = new RecommendFragment();
                     break;
             }

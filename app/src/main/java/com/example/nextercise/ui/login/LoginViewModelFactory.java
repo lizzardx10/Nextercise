@@ -1,8 +1,8 @@
 package com.example.nextercise.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
 
 import com.example.nextercise.data.LoginDataSource;
 import com.example.nextercise.data.LoginRepository;
