@@ -35,30 +35,20 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void updateProfileInfo() {
-    ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser != null) {
-            currentUser.setUsername(etChangeUsername.toString());
-            currentUser.setPassword(etChangePassword.toString());
-            currentUser.setEmail(etChangeEmail.toString());
-            Log.i(TAG, "user credentials updated!" + currentUser.getUsername());
-            currentUser.saveInBackground();
-         }else{
-             Log.e(TAG, "Issue with changing user credentials");
-        }
-    }
-
     // onViewCreated triggered soon after onCreateView()
     // setup occurs here, E.g., view lookups & attaching view listeners
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        Log.i("tester", String.valueOf(currentUser.getUsername()));
 
         etChangeUsername = view.findViewById(R.id.etChangeUsername);
         etChangeEmail = view.findViewById(R.id.etChangeEmail);
         etChangePassword = view.findViewById(R.id.etChangePassword);
         btnChangeProfInfo = view.findViewById(R.id.btnChangeProfInfo);
+
         btnChangeProfInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,5 +57,20 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+    private void updateProfileInfo() {
+    ParseUser currentUser = ParseUser.getCurrentUser();
+    Log.i(TAG, String.valueOf(currentUser.getUsername()));
+        if(currentUser != null) {
+            currentUser.setUsername(etChangeUsername.getText().toString());
+            currentUser.setPassword(etChangePassword.getText().toString());
+            currentUser.setEmail(etChangeEmail.getText().toString());
+            Log.i(TAG, "user credentials updated!" + String.valueOf(currentUser.getUsername()));
+            currentUser.saveInBackground();
+         }else{
+             Log.e(TAG, "Issue with changing user credentials");
+        }
+    }
+
 
 }

@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goHomeActivity() {
         Intent i = new Intent(this, HomeActivity.class);
+        // i.putExtra("username", etUsername.getText());
         startActivity(i);
         finish();
     }

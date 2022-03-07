@@ -2,6 +2,7 @@ package com.example.nextercise.ui.Fragments;
 
 import static com.parse.Parse.getApplicationContext;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
+import com.example.nextercise.ExerciseActivity;
 import com.example.nextercise.R;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -37,10 +39,15 @@ public class RecommendFragment extends Fragment {
     private Button btnView;
 
     private File imageFile;
+    private Exercise rExercise;
+    private int qExcId;
 
     public class QueryCount{
         private int count;
     }
+//    public static class RandomNum{
+//        private static int num;
+//    }
 
     // onCreateView called when Fragment should create its View object hierarchy, dynamically or via XML layout inflation
     @Override
@@ -61,35 +68,72 @@ public class RecommendFragment extends Fragment {
         etExcDescription = view.findViewById(R.id.etExcDescription);
         btnSkip = view.findViewById(R.id.btnSkip);
         btnView = view.findViewById(R.id.btnView);
-
+//        RandomNum rNum = new RandomNum();
+//        rNum.num = queryExercise();
         queryExercise();
+
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                queryExercise();
+            }
+        });
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goExerciseActivity();
+            }
+        });
+
     }
+
+    private void goExerciseActivity() {
+            Intent i = new Intent(getApplicationContext(), ExerciseActivity.class);
+            Log.i(TAG, String.valueOf(qExcId));
+            i.putExtra("int_value", qExcId);
+            startActivity(i);
+    }
+
     private void queryExercise() {
         ParseQuery<Exercise> query = ParseQuery.getQuery("Exercise");
         QueryCount qCount = new QueryCount();
         // call count asynchronously
         try {
-            int count  =  query.count();
+            int count = query.count();
             qCount.count = count;
-            Toast.makeText(getApplicationContext(), "Count : "+count, Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        int randomNum = ThreadLocalRandom.current().nextInt(0, qCount.count);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, qCount.count - 1);
         query.whereEqualTo("exerciseId", randomNum);
         // Execute the find asynchronously
-        query.getFirstInBackground(new GetCallback<Exercise>() {
-            public void done(Exercise recommended, ParseException e) {
-                // you want to do a check on the ParseException here as well.
-                if (recommended == null) {
-                    Log.d("nothing found", "let's go ahead and create a new object.");
-                } else {
-                    etExcName.setText(recommended.getString("exerciseName"));
-                    Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExcImage);
-                    etExcDescription.setText(recommended.getString("exerciseDescription"));
-                    //Log.d("points found", points + "");
-                }
-            }
-        });
+        try {
+            Exercise recommended = query.getFirst();
+            etExcName.setText(recommended.getString("exerciseName"));
+            Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExcImage);
+            etExcDescription.setText(recommended.getString("exerciseDescription"));
+//            rExercise = recommended;
+            qExcId = recommended.getExerciseId();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Log.d(TAG, "nothing found");
+        }
+//        {
+//            public void done(Exercise recommended, ParseException e) {
+//                // you want to do a check on the ParseException here as well.
+//                if (recommended == null) {
+//                    Log.d(TAG, "nothing found");
+//                } else {
+//                    etExcName.setText(recommended.getString("exerciseName"));
+//                    Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExcImage);
+//                    etExcDescription.setText(recommended.getString("exerciseDescription"));
+//                    rExercise = recommended;
+//                    Log.d("recommendedExc: ", rExercise.getString("exerciseName"));
+//                }
+//            }
+//        });
+//        Log.d("recommendedExc: ", rExercise.getString("exerciseName") + "");
+            // return rExercise;
+//        }
     }
 }

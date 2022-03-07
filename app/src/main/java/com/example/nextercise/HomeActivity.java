@@ -1,6 +1,7 @@
 package com.example.nextercise;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import com.example.nextercise.ui.Fragments.ProfileFragment;
 import com.example.nextercise.ui.Fragments.RecommendFragment;
 import com.example.nextercise.ui.Fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.ParseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,8 +26,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //handle navigation selection
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        Log.i("tester", String.valueOf(currentUser.getUsername()));
 
+        //handle navigation selection
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             Fragment fragment;

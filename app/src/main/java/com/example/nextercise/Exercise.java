@@ -52,9 +52,9 @@ public class Exercise extends ParseObject {
     }
     public void setExerciseInstructions(String exerciseInstructions) { put(KEY_EXERCISEINSTRUCTIONS, exerciseInstructions); }
 
-    public String getExerciseId() {
-        return getString(KEY_EXERCISEID);
+    public int getExerciseId() {
+        return getInt(KEY_EXERCISEID);
     }
-    public void setExerciseId(String exerciseId) { put(KEY_EXERCISEID, exerciseId); }
+    public void setExerciseId(Integer exerciseId) { put(KEY_EXERCISEID, exerciseId); }
 
 }
