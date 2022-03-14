@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.nextercise.HomeActivity;
+import com.example.nextercise.ui.HomeActivity;
 import com.example.nextercise.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;

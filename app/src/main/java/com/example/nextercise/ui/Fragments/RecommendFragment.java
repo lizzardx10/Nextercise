@@ -11,15 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
-import com.example.nextercise.ExerciseActivity;
+import com.example.nextercise.ui.ExerciseActivity;
 import com.example.nextercise.R;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -104,7 +102,7 @@ public class RecommendFragment extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        int randomNum = ThreadLocalRandom.current().nextInt(0, qCount.count - 1);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, qCount.count);
         query.whereEqualTo("exerciseId", randomNum);
         // Execute the find asynchronously
         try {

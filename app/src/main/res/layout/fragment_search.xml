@@ -1,37 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.Fragments.SearchFragment">
 <!--    tools:context=".ui.search.SearchFragment">-->
 
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:text="Search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toEndOf="@+id/etSearch"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/etSearch"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Search for an exercise..." />
-
+    <EditText
+        android:id="@+id/etExerciseSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:hint="@string/search_hint_value"
+        android:importantForAutofill="no"
+        android:inputType="text" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchResults"
-        android:layout_width="409dp"
-        android:layout_height="661dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSearch" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a9a9a9"
+        android:scrollbars="vertical" />
+</LinearLayout>

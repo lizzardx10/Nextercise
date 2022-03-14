@@ -1,4 +1,4 @@
-package com.example.nextercise;
+package com.example.nextercise.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nextercise.R;
 import com.example.nextercise.ui.login.LoginActivity;
 import com.example.nextercise.ui.login.RegisterActivity;
 

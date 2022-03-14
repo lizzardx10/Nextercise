@@ -14,6 +14,14 @@ public class Exercise extends ParseObject {
     public static final String KEY_EXERCISEINSTRUCTIONS = "exerciseInstructions";
     public static final String KEY_EXERCISEID = "exerciseId";
 
+    private String objectId;
+    private String exerciseName;
+    private String exerciseDescription;
+    private ParseFile exerciseImage;
+    private String videoUrl;
+    private String exerciseInstructions;
+    private int exerciseId;
+
     public String getObjectId() {
         return getString(KEY_OBJECTID);
     }

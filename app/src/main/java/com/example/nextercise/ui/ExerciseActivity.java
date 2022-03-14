@@ -1,4 +1,4 @@
-package com.example.nextercise;
+package com.example.nextercise.ui;
 
 import static com.example.nextercise.R.layout.activity_exercise;
 import static com.parse.Parse.getApplicationContext;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.nextercise.Exercise;
+import com.example.nextercise.R;
 import com.example.nextercise.ui.Fragments.RecommendFragment;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.nextercise.MainActivity;
+import com.example.nextercise.ui.MainActivity;
 import com.example.nextercise.R;
 import com.example.nextercise.databinding.ActivityRegisterBinding;
 import com.parse.ParseException;
@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
 
     private EditText etUsername;
-    private EditText etEmail;
     private EditText etPassword;
     private EditText etConfirmPassword;
     private Button btnRegister;
@@ -37,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         etUsername = findViewById(R.id.etUsername);
-        etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);

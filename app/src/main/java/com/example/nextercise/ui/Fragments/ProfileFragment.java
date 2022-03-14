@@ -20,7 +20,6 @@ public class ProfileFragment extends Fragment {
 
     private TextView etChangeUsername;
     private TextView etChangePassword;
-    private TextView etChangeEmail;
     private Button btnChangeProfInfo;
 
     public ProfileFragment() {
@@ -45,7 +44,6 @@ public class ProfileFragment extends Fragment {
         Log.i("tester", String.valueOf(currentUser.getUsername()));
 
         etChangeUsername = view.findViewById(R.id.etChangeUsername);
-        etChangeEmail = view.findViewById(R.id.etChangeEmail);
         etChangePassword = view.findViewById(R.id.etChangePassword);
         btnChangeProfInfo = view.findViewById(R.id.btnChangeProfInfo);
 
@@ -64,7 +62,6 @@ public class ProfileFragment extends Fragment {
         if(currentUser != null) {
             currentUser.setUsername(etChangeUsername.getText().toString());
             currentUser.setPassword(etChangePassword.getText().toString());
-            currentUser.setEmail(etChangeEmail.getText().toString());
             Log.i(TAG, "user credentials updated!" + String.valueOf(currentUser.getUsername()));
             currentUser.saveInBackground();
          }else{

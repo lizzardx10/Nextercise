@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nextercise">
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
@@ -25,11 +25,11 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
-        <activity android:name=".ExerciseActivity"
+        <activity android:name=".ui.ExerciseActivity"
             android:exported="false"
             android:label="ExerciseActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
