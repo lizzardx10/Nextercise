@@ -14,4 +14,9 @@
     <string name="title_recommend">Recommend</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
+    <string name="profile_information_title">Profile Information</string>
+    <string name="password_hint">Password</string>
+    <string name="username_hint">Username</string>
+    <string name="change_info_btn_title">Change Info</string>
+    <string name="search_hint_value">Push-ups</string>
 </resources>
