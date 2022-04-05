@@ -1,5 +1,6 @@
 package com.example.nextercise.ui.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,13 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nextercise.Exercise;
+import com.example.nextercise.ui.HomeActivity;
+import com.example.nextercise.ui.ListAdapter;
+import com.example.nextercise.ui.MainActivity;
+import com.parse.FindCallback;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import com.example.nextercise.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
     public static final String TAG = "ProfileFragment";
@@ -21,6 +34,10 @@ public class ProfileFragment extends Fragment {
     private TextView etChangeUsername;
     private TextView etChangePassword;
     private Button btnChangeProfInfo;
+    private Button btnLogout;
+    private RecyclerView rvSavedExerciseList;
+    private List<Exercise> savedExercises;
+    private ListAdapter adapter;
 
     public ProfileFragment() {
         // requires empty public constructor
@@ -46,6 +63,7 @@ public class ProfileFragment extends Fragment {
         etChangeUsername = view.findViewById(R.id.etChangeUsername);
         etChangePassword = view.findViewById(R.id.etChangePassword);
         btnChangeProfInfo = view.findViewById(R.id.btnChangeProfInfo);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
         btnChangeProfInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +72,30 @@ public class ProfileFragment extends Fragment {
                 updateProfileInfo();
             }
         });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOutInBackground(e -> {
+                    if (e==null){
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
+        // Steps to use the recycler view
+        // 0. create layout for one row in the list - done in example_list_item.xml file
+        rvSavedExerciseList = view.findViewById(R.id.rvSavedExerciseList);
+        rvSavedExerciseList.setHasFixedSize(true);
+        // 1. create the adapter
+        savedExercises = new ArrayList<>();
+        adapter = new ListAdapter(getContext(),savedExercises);
+        // 2. create the data source
+        // 3. set the adapter on the recycler view
+        rvSavedExerciseList.setAdapter(adapter);
+        // 4. set the layout manager on the recycler view
+        rvSavedExerciseList.setLayoutManager(new LinearLayoutManager(getContext()));
+        queryExercises();
     }
 
     private void updateProfileInfo() {
@@ -68,6 +110,23 @@ public class ProfileFragment extends Fragment {
              Log.e(TAG, "Issue with changing user credentials");
         }
     }
-
-
+    
+    private void queryExercises() {
+        ParseQuery<Exercise> query = ParseQuery.getQuery(Exercise.class);
+        query.whereExists("exerciseList");
+        query.findInBackground(new FindCallback<Exercise>() {
+            @Override
+            public void done(List<Exercise> exercises, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting exercises", e);
+                    return;
+                }
+                for (Exercise exercise : exercises) {
+                    Log.i(TAG, "Exercise: " + exercise.getExerciseName());
+                }
+                savedExercises.addAll(exercises);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
 }

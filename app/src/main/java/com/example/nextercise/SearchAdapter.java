@@ -33,9 +33,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         this.exerciseList = exercises;
     }
 
-
-
-
     @NonNull
     @Override
     public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -96,4 +93,3 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
     }
 }
-

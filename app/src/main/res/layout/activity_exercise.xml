@@ -15,7 +15,8 @@
             android:id="@+id/etExerciseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/search_hint_value"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -28,9 +29,9 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etExerciseName"
+            app:layout_constraintTop_toBottomOf="@+id/sToggleAdd"
             app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
         <TextView
@@ -38,7 +39,7 @@
             android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +51,7 @@
             android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Description of the Exercise: "
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +74,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Instructions for the Exercise: "
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etExerciseDescription" />
+
+        <Switch
+            android:id="@+id/sToggleAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:minHeight="48dp"
+            android:text="Add to List"
+            app:layout_constraintBottom_toTopOf="@+id/ivExerciseImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

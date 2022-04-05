@@ -45,13 +45,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        Log.i(TAG, "Attempting to login user" + username);
+        Log.i(TAG, "Attempting to login user: " + username);
 
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "Issue with login", e);
+                    Log.e(TAG, "Issue with login ", e);
                     return;
                 }
                 goHomeActivity();

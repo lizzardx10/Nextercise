@@ -20,10 +20,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // initialize views here
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnCreateAcc = findViewById(R.id.btnCreateAcc);
-        // set onclicklistener for your button
+        // set onClickListener for your button
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
