@@ -22,6 +22,7 @@ public class Exercise extends ParseObject {
     private String exerciseInstructions;
     private int exerciseId;
 
+    public Exercise(){}
     public String getObjectId() {
         return getString(KEY_OBJECTID);
     }
@@ -64,5 +65,4 @@ public class Exercise extends ParseObject {
         return getInt(KEY_EXERCISEID);
     }
     public void setExerciseId(Integer exerciseId) { put(KEY_EXERCISEID, exerciseId); }
-
 }

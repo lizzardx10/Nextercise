@@ -98,7 +98,7 @@ public class RecommendFragment extends Fragment {
         // call count asynchronously
         try {
             int count = query.count();
-            qCount.count = count;
+            qCount.count = count+1;
         } catch (ParseException e) {
             e.printStackTrace();
         }

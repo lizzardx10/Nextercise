@@ -1,4 +1,4 @@
-package com.example.nextercise.ui;
+package com.example.nextercise;
 
 import static com.parse.Parse.getApplicationContext;
 
@@ -15,8 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.nextercise.Exercise;
-import com.example.nextercise.R;
+import com.example.nextercise.ui.ExerciseActivity;
 import com.parse.ParseFile;
 
 import java.util.ArrayList;

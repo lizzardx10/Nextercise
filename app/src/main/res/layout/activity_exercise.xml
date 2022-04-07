@@ -31,7 +31,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sToggleAdd"
+            app:layout_constraintTop_toBottomOf="@+id/cbFavorite"
             app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
         <TextView
@@ -80,16 +80,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etExerciseDescription" />
 
-        <Switch
-            android:id="@+id/sToggleAdd"
-            android:layout_width="0dp"
+        <CheckBox
+            android:id="@+id/cbFavorite"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:minHeight="48dp"
             android:text="Add to List"
-            app:layout_constraintBottom_toTopOf="@+id/ivExerciseImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

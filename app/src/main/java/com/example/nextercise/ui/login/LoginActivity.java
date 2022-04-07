@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goHomeActivity() {
         Intent i = new Intent(this, HomeActivity.class);
-        // i.putExtra("username", etUsername.getText());
         startActivity(i);
         finish();
     }

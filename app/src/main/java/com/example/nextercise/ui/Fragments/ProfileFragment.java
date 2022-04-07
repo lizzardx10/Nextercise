@@ -1,6 +1,7 @@
 package com.example.nextercise.ui.Fragments;
 
-import android.content.Intent;
+import static com.parse.Parse.getApplicationContext;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
-import com.example.nextercise.ui.HomeActivity;
-import com.example.nextercise.ui.ListAdapter;
-import com.example.nextercise.ui.MainActivity;
+import com.example.nextercise.ListAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseUser;
 import com.parse.ParseException;
@@ -25,10 +25,16 @@ import com.parse.ParseQuery;
 
 import com.example.nextercise.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment
+{
     public static final String TAG = "ProfileFragment";
 
     private TextView etChangeUsername;
@@ -88,14 +94,14 @@ public class ProfileFragment extends Fragment {
         rvSavedExerciseList = view.findViewById(R.id.rvSavedExerciseList);
         rvSavedExerciseList.setHasFixedSize(true);
         // 1. create the adapter
-        savedExercises = new ArrayList<>();
+        savedExercises = new ArrayList<Exercise>();
         adapter = new ListAdapter(getContext(),savedExercises);
         // 2. create the data source
         // 3. set the adapter on the recycler view
         rvSavedExerciseList.setAdapter(adapter);
         // 4. set the layout manager on the recycler view
         rvSavedExerciseList.setLayoutManager(new LinearLayoutManager(getContext()));
-        queryExercises();
+        queryExerciseIds();
     }
 
     private void updateProfileInfo() {
@@ -111,22 +117,45 @@ public class ProfileFragment extends Fragment {
         }
     }
     
-    private void queryExercises() {
-        ParseQuery<Exercise> query = ParseQuery.getQuery(Exercise.class);
-        query.whereExists("exerciseList");
-        query.findInBackground(new FindCallback<Exercise>() {
+    private void queryExerciseIds() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        // List<Integer> exerciseIdList = new ArrayList<>();
+        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+        query.whereEqualTo("objectId", currentUser.getObjectId());
+        query.findInBackground(new FindCallback<ParseUser>() {
             @Override
-            public void done(List<Exercise> exercises, ParseException e) {
+            public void done(List<ParseUser> users, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting exercises", e);
+                    Log.e(TAG, "Issue with getting saved exercises", e);
                     return;
                 }
-                for (Exercise exercise : exercises) {
-                    Log.i(TAG, "Exercise: " + exercise.getExerciseName());
+                for (ParseUser user : users) {
+                    List<Integer> tempList = new ArrayList<Integer>();
+//                    Log.i(TAG, "Saved List: " + user.get("exerciseList").toString());
+//                    Log.i(TAG, String.valueOf(user.get("exerciseList").getClass()));
+                    tempList = (List<Integer>) user.get("exerciseList");
+                    if (tempList != null) {
+                        for (int i = 0; i < tempList.size(); i++) {
+                            Log.i(TAG, String.valueOf(tempList.get(i).getClass()));
+                            queryExercise(tempList.get(i));
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-                savedExercises.addAll(exercises);
-                adapter.notifyDataSetChanged();
             }
-        });
+         });
+    }
+
+    private void queryExercise(int exerciseId) {
+        ParseQuery<Exercise> query = ParseQuery.getQuery("Exercise");
+        query.whereEqualTo("exerciseId", exerciseId);
+        // Execute the find asynchronously
+        try {
+            Exercise recommended = query.getFirst();
+            savedExercises.add(recommended);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Log.d(TAG, "nothing found");
+        }
     }
 }

@@ -90,9 +90,10 @@ public class SearchFragment extends Fragment {
                     Log.e(TAG, "Issue with getting exercises", e);
                     return;
                 }
-                for (Exercise exercise : exercises) {
-                    Log.i(TAG, "Exercise: " + exercise.getExerciseName());
-                }
+                //Lines to test if search fragment is pulling exercises correctly
+//                for (Exercise exercise : exercises) {
+//                    Log.i(TAG, "Exercise: " + exercise.getExerciseName());
+//                }
                 allExercises.addAll(exercises);
                 adapter.notifyDataSetChanged();
             }
