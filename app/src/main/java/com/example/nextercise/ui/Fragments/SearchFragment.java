@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nextercise.Exercise;
 import com.example.nextercise.R;
 import com.example.nextercise.SearchAdapter;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -25,11 +23,9 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
     public static final String TAG = "SearchFragment";
-    private EditText etSearchExercise;
-    private RecyclerView rvSearchResults;
     private SearchAdapter adapter;
-    private List<Exercise> allExercises;
-    private RecyclerView.LayoutManager layoutManager;
+    private List<Exercise> searchResultExercises;
+    //private RecyclerView.LayoutManager layoutManager;
 
     public SearchFragment() {
         // requires empty public constructor
@@ -48,11 +44,11 @@ public class SearchFragment extends Fragment {
 
         // Steps to use the recycler view
         // 0. create layout for one row in the list - done in example_search_result.xml file
-        rvSearchResults = view.findViewById(R.id.rvSearchResults);
+        RecyclerView rvSearchResults = view.findViewById(R.id.rvSearchResults);
         rvSearchResults.setHasFixedSize(true);
         // 1. create the adapter
-        allExercises = new ArrayList<>();
-        adapter = new SearchAdapter(getContext(),allExercises);
+        searchResultExercises = new ArrayList<>();
+        adapter = new SearchAdapter(getContext(), searchResultExercises);
         // 2. create the data source
         // 3. set the adapter on the recycler view
         rvSearchResults.setAdapter(adapter);
@@ -60,7 +56,7 @@ public class SearchFragment extends Fragment {
         rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
         queryExercises();
 
-        etSearchExercise = view.findViewById(R.id.etExerciseSearch);
+        EditText etSearchExercise = view.findViewById(R.id.etExerciseSearch);
         etSearchExercise.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -81,27 +77,25 @@ public class SearchFragment extends Fragment {
 
     private void queryExercises() {
         ParseQuery<Exercise> query = ParseQuery.getQuery(Exercise.class);
-        query.findInBackground(new FindCallback<Exercise>() {
-            @Override
-            public void done(List<Exercise> exercises, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting exercises", e);
-                    return;
-                }
+        query.setLimit(20);
+        query.findInBackground((exercises, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Issue with getting exercises", e);
+                return;
+            }
 //                Lines to test if search fragment is pulling exercises correctly
 //                for (Exercise exercise : exercises) {
 //                    Log.i(TAG, "Exercise: " + exercise.getExerciseName());
 //                }
-                allExercises.addAll(exercises);
-                adapter.notifyDataSetChanged();
-            }
+            searchResultExercises.addAll(exercises);
+            adapter.notifyDataSetChanged();
         });
     }
 
     private void filter(String searchText) {
         ArrayList<Exercise> filteredList = new ArrayList<>();
 
-        for (Exercise exercise : allExercises) {
+        for (Exercise exercise : searchResultExercises) {
             if(exercise.getExerciseName().toLowerCase().contains(searchText.toLowerCase())) {
                 filteredList.add(exercise);
             }

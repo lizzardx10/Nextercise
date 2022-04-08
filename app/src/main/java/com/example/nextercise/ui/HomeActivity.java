@@ -1,7 +1,6 @@
 package com.example.nextercise.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,25 +12,20 @@ import com.example.nextercise.ui.Fragments.ProfileFragment;
 import com.example.nextercise.ui.Fragments.RecommendFragment;
 import com.example.nextercise.ui.Fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.parse.ParseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
     public static final String TAG = "HomeActivity";
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    private BottomNavigationView bottomNavigationView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        Log.i("tester", String.valueOf(currentUser.getUsername()));
-
-        //handle navigation selection
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+        // handle navigation selection
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             Fragment fragment;
             switch (menuItem.getItemId()) {
@@ -47,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_recommend:
                 default:
 
-                    // Toast.makeText(HomeActivity.this, "Recommended!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Recommended!", Toast.LENGTH_SHORT).show();
                     fragment = new RecommendFragment();
                     break;
             }

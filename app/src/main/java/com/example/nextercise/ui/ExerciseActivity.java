@@ -44,27 +44,23 @@ public class ExerciseActivity extends AppCompatActivity {
         cbFavorite = findViewById(R.id.cbFavorite);
         loadExercise(temp);
         cbFavorite.setChecked(checkFavorite(temp));
-        cbFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!cbFavorite.isChecked()) {
-                    removeFavorite(temp);
-                    Log.i(TAG, "Checkbox un-checked!" + ParseUser.getCurrentUser().get("exerciseList"));
-                }
-                else if(cbFavorite.isChecked()) {
-                    addFavorite(temp);
-                    Log.i(TAG, "Checkbox checked! " + ParseUser.getCurrentUser().get("exerciseList"));
-                }
-                else
-                    Log.i(TAG, "Something went wrong");
+        cbFavorite.setOnClickListener(v -> {
+            if(!cbFavorite.isChecked()) {
+                removeFavorite(temp);
+                Log.i(TAG, "Checkbox un-checked!" + ParseUser.getCurrentUser().get("exerciseList"));
             }
+            else if(cbFavorite.isChecked()) {
+                addFavorite(temp);
+                Log.i(TAG, "Checkbox checked! " + ParseUser.getCurrentUser().get("exerciseList"));
+            }
+            else
+                Log.i(TAG, "Something went wrong");
         });
     }
 
     private void loadExercise(int exerciseId) {
         ParseQuery<Exercise> query = ParseQuery.getQuery("Exercise");
         query.whereEqualTo("exerciseId", exerciseId);
-        ParseUser currentUser = ParseUser.getCurrentUser();
         // Execute the find asynchronously
         try {
             Exercise recommended = query.getFirst();
@@ -80,24 +76,28 @@ public class ExerciseActivity extends AppCompatActivity {
         }
     }
     private Boolean checkFavorite(Integer currentExerciseId){
-        Boolean isSaved = false;
+        boolean isSaved = false;
         ParseUser currentUser = ParseUser.getCurrentUser();
+        // Retrieves the saved list of exerciseIds from the current user's exerciseList attribute
         ArrayList<Integer> savedExercises = (ArrayList<Integer>) currentUser.get("exerciseList");
         if(currentUser.get("exerciseList") == null) {
             currentUser.put("exerciseList", new ArrayList<Integer>());
             currentUser.saveInBackground();
         }
-        else
+        else {
+            assert savedExercises != null;
             if(savedExercises.contains(currentExerciseId)) {
                 Log.i(TAG, "successfully found favorited item" + currentExerciseId);
                 isSaved = true;
             }
+        }
         return isSaved;
     }
     private void addFavorite(Integer exerciseId){
         ParseUser currentUser = ParseUser.getCurrentUser();
         ArrayList<Integer> favoritesList = (ArrayList<Integer>) currentUser.get("exerciseList");
-        favoritesList.add(new Integer(exerciseId));
+        assert favoritesList != null;
+        favoritesList.add(exerciseId);
         currentUser.put("exerciseList", favoritesList);
         currentUser.saveInBackground();
     }
@@ -106,7 +106,7 @@ public class ExerciseActivity extends AppCompatActivity {
         ArrayList<Integer> favoritesList = (ArrayList<Integer>) currentUser.get("exerciseList");
         if (favoritesList != null){
             if(favoritesList.contains(exerciseId)) {
-                favoritesList.remove(new Integer(exerciseId));
+                favoritesList.remove(Integer.valueOf(exerciseId));
                 currentUser.put("exerciseList", favoritesList);
                 currentUser.saveInBackground();
             }

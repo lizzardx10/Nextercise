@@ -32,7 +32,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbFavorite"
-            app:srcCompat="@android:drawable/ic_menu_myplaces" />
+            app:srcCompat="@android:drawable/ic_menu_myplaces"
+            android:contentDescription="Image of selected exercise" />
 
         <TextView
             android:id="@+id/etExerciseDescription"

@@ -18,7 +18,6 @@ import com.example.nextercise.Exercise;
 import com.example.nextercise.ListAdapter;
 import com.example.nextercise.R;
 import com.example.nextercise.ui.MainActivity;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -32,9 +31,6 @@ public class ProfileFragment extends Fragment
 
     private TextView etChangeUsername;
     private TextView etChangePassword;
-    private Button btnChangeProfInfo;
-    private Button btnLogout;
-    private RecyclerView rvSavedExerciseList;
     private List<Exercise> savedExercises;
     private ListAdapter adapter;
 
@@ -57,35 +53,29 @@ public class ProfileFragment extends Fragment
         // setup any handles to view objects here
         etChangeUsername = view.findViewById(R.id.etChangeUsername);
         etChangePassword = view.findViewById(R.id.etChangePassword);
-        btnChangeProfInfo = view.findViewById(R.id.btnChangeProfInfo);
-        btnLogout = view.findViewById(R.id.btnLogout);
+        Button btnChangeProfInfo = view.findViewById(R.id.btnChangeProfInfo);
+        Button btnLogout = view.findViewById(R.id.btnLogout);
 
-        btnChangeProfInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick Change Profile Info Button");
-                updateProfileInfo();
-            }
+        btnChangeProfInfo.setOnClickListener(v -> {
+            Log.i(TAG, "onClick Change Profile Info Button");
+            updateProfileInfo();
         });
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser.logOutInBackground(e -> {
-                    if (e==null){
-                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-                goMainActivity();
-            }
+        btnLogout.setOnClickListener(v -> {
+            ParseUser.logOutInBackground(e -> {
+                if (e!=null){
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            goMainActivity();
         });
 
         // Steps to use the recycler view
         // 0. create layout for one row in the list - done in example_list_item.xml file
-        rvSavedExerciseList = view.findViewById(R.id.rvSavedExerciseList);
+        RecyclerView rvSavedExerciseList = view.findViewById(R.id.rvSavedExerciseList);
         rvSavedExerciseList.setHasFixedSize(true);
         // 1. create the adapter
-        savedExercises = new ArrayList<Exercise>();
+        savedExercises = new ArrayList<>();
         adapter = new ListAdapter(getContext(),savedExercises);
         // 2. create the data source
         // 3. set the adapter on the recycler view
@@ -98,14 +88,10 @@ public class ProfileFragment extends Fragment
     private void updateProfileInfo() {
     ParseUser currentUser = ParseUser.getCurrentUser();
     Log.i(TAG, String.valueOf(currentUser.getUsername()));
-        if(currentUser != null) {
-            currentUser.setUsername(etChangeUsername.getText().toString());
-            currentUser.setPassword(etChangePassword.getText().toString());
-            Log.i(TAG, "user credentials updated!" + String.valueOf(currentUser.getUsername()));
-            currentUser.saveInBackground();
-         }else{
-             Log.e(TAG, "Issue with changing user credentials");
-        }
+        currentUser.setUsername(etChangeUsername.getText().toString());
+        currentUser.setPassword(etChangePassword.getText().toString());
+        Log.i(TAG, "user credentials updated!" + currentUser.getUsername());
+        currentUser.saveInBackground();
     }
     
     private void queryExerciseIds() {
@@ -113,28 +99,29 @@ public class ProfileFragment extends Fragment
         // List<Integer> exerciseIdList = new ArrayList<>();
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         query.whereEqualTo("objectId", currentUser.getObjectId());
-        query.findInBackground(new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> users, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting saved exercises", e);
-                    return;
-                }
-                for (ParseUser user : users) {
-                    List<Integer> tempList = new ArrayList<Integer>();
+        query.findInBackground((users, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Issue with getting saved exercises", e);
+                return;
+            }
+            for (ParseUser user : users) {
+                List<Integer> tempList;
+//                Lines to test if saved exercises for user are being loaded properly
 //                    Log.i(TAG, "Saved List: " + user.get("exerciseList").toString());
 //                    Log.i(TAG, String.valueOf(user.get("exerciseList").getClass()));
-                    tempList = (List<Integer>) user.get("exerciseList");
-                    if (tempList != null) {
-                        for (int i = 0; i < tempList.size(); i++) {
-                            Log.i(TAG, String.valueOf(tempList.get(i).getClass()));
-                            queryExercise(tempList.get(i));
-                        }
+                // exerciseList is stored as a list of Integers in the database
+                tempList = (List<Integer>) user.get("exerciseList");
+                if (tempList != null) {
+                    for (int i = 0; i < tempList.size(); i++) {
+                        Log.i(TAG, String.valueOf(tempList.get(i).getClass()));
+                        queryExercise(tempList.get(i));
+                        adapter.notifyItemInserted(i);
                     }
-                    adapter.notifyDataSetChanged();
                 }
+                //adapter.notifyItemRangeChanged(0, tempList.size());
+                //adapter.notifyDataSetChanged();
             }
-         });
+        });
     }
 
     private void queryExercise(int exerciseId) {

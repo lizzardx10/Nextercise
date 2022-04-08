@@ -21,7 +21,6 @@ import com.example.nextercise.ui.ExerciseActivity;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import java.io.File;
 import java.util.Random;
 
 public class RecommendFragment extends Fragment {
@@ -29,23 +28,16 @@ public class RecommendFragment extends Fragment {
     public RecommendFragment() {
         // requires empty public constructor
     }
+    // Abbreviation "Exc" was used in place of "Exercise" in this file due to conflicting variable names.
     private TextView etExcName;
     private ImageView ivExcImage;
     private TextView etExcDescription;
+    private int queriedExerciseId;
 
-    private Button btnSkip;
-    private Button btnView;
-
-    private File imageFile;
-    private Exercise rExercise;
-    private int qExcId;
-
-    public class QueryCount{
+    public static class QueryCount{
+        // class to hold the number of exercises in the database
         private int count;
     }
-//    public static class RandomNum{
-//        private static int num;
-//    }
 
     // onCreateView called when Fragment should create its View object hierarchy, dynamically or via XML layout inflation
     @Override
@@ -64,31 +56,20 @@ public class RecommendFragment extends Fragment {
         etExcName = view.findViewById(R.id.etExcName);
         ivExcImage = view.findViewById(R.id.ivExcImage);
         etExcDescription = view.findViewById(R.id.etExcDescription);
-        btnSkip = view.findViewById(R.id.btnSkip);
-        btnView = view.findViewById(R.id.btnView);
-//        RandomNum rNum = new RandomNum();
-//        rNum.num = queryExercise();
+        Button btnSkip = view.findViewById(R.id.btnSkip);
+        Button btnView = view.findViewById(R.id.btnView);
+
         queryExercise();
 
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                queryExercise();
-            }
-        });
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goExerciseActivity();
-            }
-        });
+        btnSkip.setOnClickListener(v -> queryExercise());
+        btnView.setOnClickListener(v -> goExerciseActivity());
 
     }
 
     private void goExerciseActivity() {
             Intent i = new Intent(getApplicationContext(), ExerciseActivity.class);
-            Log.i(TAG, String.valueOf(qExcId));
-            i.putExtra("int_value", qExcId);
+            Log.i(TAG, String.valueOf(queriedExerciseId));
+            i.putExtra("int_value", queriedExerciseId);
             startActivity(i);
     }
 
@@ -97,13 +78,12 @@ public class RecommendFragment extends Fragment {
         QueryCount qCount = new QueryCount();
         // call count asynchronously
         try {
-            int count = query.count();
-            qCount.count = count+1;
+            qCount.count = query.count();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         Random random = new Random();
-        int randomNumb = random.nextInt(qCount.count - 0) + 0;
+        int randomNumb = random.nextInt(qCount.count);
         query.whereEqualTo("exerciseId", randomNumb);
         // Execute the find asynchronously
         try {
@@ -112,7 +92,7 @@ public class RecommendFragment extends Fragment {
             Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExcImage);
             etExcDescription.setText(recommended.getString("exerciseDescription"));
 //            rExercise = recommended;
-            qExcId = recommended.getExerciseId();
+            queriedExerciseId = recommended.getExerciseId();
         } catch (ParseException e) {
             e.printStackTrace();
             Log.d(TAG, "nothing found");

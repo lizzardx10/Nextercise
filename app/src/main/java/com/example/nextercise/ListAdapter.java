@@ -18,14 +18,13 @@ import com.bumptech.glide.Glide;
 import com.example.nextercise.ui.ExerciseActivity;
 import com.parse.ParseFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
 private static final String TAG = "SearchAdapter";
-private Context context;
-private List<Exercise> exerciseList;
+private final Context context;
+private final List<Exercise> exerciseList;
 
 public ListAdapter(Context context, List<Exercise> exercises) {
         this.context = context;
@@ -36,8 +35,7 @@ public ListAdapter(Context context, List<Exercise> exercises) {
 @Override
 public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.example_list_item, parent, false);
-        ListViewHolder svh = new ListViewHolder(v);
-        return svh;
+    return new ListViewHolder(v);
         }
 
 @Override
@@ -45,16 +43,13 @@ public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Exercise currentItem = exerciseList.get(position);
         holder.bind(currentItem);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View v) {
-        //Navigate to the Exercise activity associated with the item clicked
-        Intent i = new Intent(getApplicationContext(), ExerciseActivity.class);
-        Log.i(TAG, String.valueOf(currentItem.getExerciseId()));
-        i.putExtra("int_value", currentItem.getExerciseId());
-        context.startActivity(i);
-        }
-        });
+        holder.itemView.setOnClickListener(v -> {
+                //Navigate to the Exercise activity associated with the item clicked
+                Intent i = new Intent(getApplicationContext(), ExerciseActivity.class);
+                Log.i(TAG, String.valueOf(currentItem.getExerciseId()));
+                i.putExtra("int_value", currentItem.getExerciseId());
+                context.startActivity(i);
+                });
         }
 
 @Override
@@ -62,18 +57,12 @@ public int getItemCount() {
         return exerciseList.size();
         }
 
-public void filterList(ArrayList<Exercise> filteredList) {
-        exerciseList = filteredList;
-        notifyDataSetChanged();
-        }
+    public class ListViewHolder extends RecyclerView.ViewHolder {
 
-public class ListViewHolder extends RecyclerView.ViewHolder {
+    private final ImageView ivSearchImage;
+    private final TextView tvSearchTitle;
 
-    private ImageView ivSearchImage;
-    private TextView tvSearchTitle;
-    private TextView tvSearchDesc;
-
-    public ListViewHolder(@NonNull View itemView) {
+        public ListViewHolder(@NonNull View itemView) {
         super(itemView);
         ivSearchImage = itemView.findViewById(R.id.ivSearchImage);
         tvSearchTitle = itemView.findViewById(R.id.tvSearchTitle);

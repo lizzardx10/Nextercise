@@ -25,7 +25,7 @@ import java.util.List;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
     private static final String TAG = "SearchAdapter";
-    private Context context;
+    private final Context context;
     private List<Exercise> exerciseList;
 
     public SearchAdapter(Context context, List<Exercise> exercises) {
@@ -37,8 +37,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     @Override
     public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.example_search_result, parent, false);
-        SearchViewHolder svh = new SearchViewHolder(v);
-        return svh;
+        return new SearchViewHolder(v);
     }
 
     @Override
@@ -46,15 +45,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         Exercise currentItem = exerciseList.get(position);
         holder.bind(currentItem);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Navigate to the Exercise activity associated with the item clicked
-                Intent i = new Intent(getApplicationContext(), ExerciseActivity.class);
-                Log.i(TAG, String.valueOf(currentItem.getExerciseId()));
-                i.putExtra("int_value", currentItem.getExerciseId());
-                context.startActivity(i);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            //Navigate to the Exercise activity associated with the item clicked
+            Intent i = new Intent(getApplicationContext(), ExerciseActivity.class);
+            Log.i(TAG, String.valueOf(currentItem.getExerciseId()));
+            i.putExtra("int_value", currentItem.getExerciseId());
+            context.startActivity(i);
         });
     }
 
@@ -71,9 +67,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     public class SearchViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView ivSearchImage;
-        private TextView tvSearchTitle;
-        private TextView tvSearchDesc;
+        private final ImageView ivSearchImage;
+        private final TextView tvSearchTitle;
+        private final TextView tvSearchDesc;
 
         public SearchViewHolder(@NonNull View itemView) {
             super(itemView);
