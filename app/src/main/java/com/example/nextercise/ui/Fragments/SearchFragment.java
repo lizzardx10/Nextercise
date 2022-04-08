@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nextercise.ExampleSearchResult;
 import com.example.nextercise.Exercise;
 import com.example.nextercise.R;
 import com.example.nextercise.SearchAdapter;
@@ -23,7 +22,6 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class SearchFragment extends Fragment {
     public static final String TAG = "SearchFragment";
@@ -49,7 +47,7 @@ public class SearchFragment extends Fragment {
         // setup any handles to view objects here
 
         // Steps to use the recycler view
-        // 0. create layout for one row in the list - done in example_searchresult.xml file
+        // 0. create layout for one row in the list - done in example_search_result.xml file
         rvSearchResults = view.findViewById(R.id.rvSearchResults);
         rvSearchResults.setHasFixedSize(true);
         // 1. create the adapter
@@ -90,7 +88,7 @@ public class SearchFragment extends Fragment {
                     Log.e(TAG, "Issue with getting exercises", e);
                     return;
                 }
-                //Lines to test if search fragment is pulling exercises correctly
+//                Lines to test if search fragment is pulling exercises correctly
 //                for (Exercise exercise : exercises) {
 //                    Log.i(TAG, "Exercise: " + exercise.getExerciseName());
 //                }

@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.nextercise.ui.MainActivity;
 import com.example.nextercise.R;
 import com.example.nextercise.databinding.ActivityRegisterBinding;
+import com.example.nextercise.ui.MainActivity;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;

@@ -1,7 +1,6 @@
 package com.example.nextercise.ui;
 
 import static com.example.nextercise.R.layout.activity_exercise;
-import static com.parse.Parse.getApplicationContext;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,28 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
 import com.example.nextercise.R;
-import com.example.nextercise.SearchAdapter;
-import com.example.nextercise.ui.Fragments.RecommendFragment;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ExerciseActivity extends AppCompatActivity {
     public static final String TAG = "ExerciseActivity";
@@ -58,24 +47,24 @@ public class ExerciseActivity extends AppCompatActivity {
         cbFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cbFavorite.isChecked()) {
-                    Log.i(TAG, "Checkbox is checked!" + ParseUser.getCurrentUser().get("exerciseList"));
+                if(!cbFavorite.isChecked()) {
                     removeFavorite(temp);
+                    Log.i(TAG, "Checkbox un-checked!" + ParseUser.getCurrentUser().get("exerciseList"));
+                }
+                else if(cbFavorite.isChecked()) {
+                    addFavorite(temp);
+                    Log.i(TAG, "Checkbox checked! " + ParseUser.getCurrentUser().get("exerciseList"));
                 }
                 else
-                    addFavorite(temp);
+                    Log.i(TAG, "Something went wrong");
             }
         });
-
     }
 
     private void loadExercise(int exerciseId) {
         ParseQuery<Exercise> query = ParseQuery.getQuery("Exercise");
         query.whereEqualTo("exerciseId", exerciseId);
         ParseUser currentUser = ParseUser.getCurrentUser();
-        // ArrayList<String> SavedList = currentUser.getJSONArray("exerciseList");
-//        String recExcID = recommended.getString("objectId");
-
         // Execute the find asynchronously
         try {
             Exercise recommended = query.getFirst();
@@ -84,46 +73,42 @@ public class ExerciseActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExerciseImage);
             etExerciseDescription.setText(recommended.getExerciseDescription());
             etExerciseInstructions.setText(recommended.getExerciseInstructions());
-
-//            if(currentUser.containsKey("exerciseList") && )
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
             Log.d(TAG, "nothing found");
         }
     }
-    private Boolean checkFavorite(int currentExerciseId){
+    private Boolean checkFavorite(Integer currentExerciseId){
         Boolean isSaved = false;
         ParseUser currentUser = ParseUser.getCurrentUser();
         ArrayList<Integer> savedExercises = (ArrayList<Integer>) currentUser.get("exerciseList");
-        if(savedExercises.contains("currentExerciseId")) {
-            Log.i(TAG, "successfully found favorited item" + currentExerciseId);
-            isSaved = true;
+        if(currentUser.get("exerciseList") == null) {
+            currentUser.put("exerciseList", new ArrayList<Integer>());
+            currentUser.saveInBackground();
         }
+        else
+            if(savedExercises.contains(currentExerciseId)) {
+                Log.i(TAG, "successfully found favorited item" + currentExerciseId);
+                isSaved = true;
+            }
         return isSaved;
     }
-    private void addFavorite(int exerciseId){
+    private void addFavorite(Integer exerciseId){
         ParseUser currentUser = ParseUser.getCurrentUser();
-        ArrayList<Integer> favoritesList = new ArrayList<Integer>();
-        JSONArray jFavoritesList = currentUser.getJSONArray("exerciseList");
-        if (jFavoritesList != null){
-            for (int i =0; i < jFavoritesList.length(); i++){
-                try {
-                    favoritesList.add(jFavoritesList.getInt(i));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        favoritesList.add(exerciseId);
+        ArrayList<Integer> favoritesList = (ArrayList<Integer>) currentUser.get("exerciseList");
+        favoritesList.add(new Integer(exerciseId));
+        currentUser.put("exerciseList", favoritesList);
+        currentUser.saveInBackground();
     }
     private void removeFavorite(int exerciseId){
         ParseUser currentUser = ParseUser.getCurrentUser();
         ArrayList<Integer> favoritesList = (ArrayList<Integer>) currentUser.get("exerciseList");
         if (favoritesList != null){
-            if(favoritesList.contains("exerciseId")) {
-                favoritesList.remove("exerciseId");
-                currentUser.remove("exerciseList");
+            if(favoritesList.contains(exerciseId)) {
+                favoritesList.remove(new Integer(exerciseId));
                 currentUser.put("exerciseList", favoritesList);
+                currentUser.saveInBackground();
             }
         }
     }

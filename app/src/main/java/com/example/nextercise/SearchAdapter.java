@@ -36,7 +36,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     @NonNull
     @Override
     public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.example_searchresult, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.example_search_result, parent, false);
         SearchViewHolder svh = new SearchViewHolder(v);
         return svh;
     }
@@ -64,6 +64,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
 
     public void filterList(ArrayList<Exercise> filteredList) {
+        // Filtering list for searching
         exerciseList = filteredList;
         notifyDataSetChanged();
     }
@@ -76,6 +77,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
         public SearchViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Initialize the data fields for the Search Adapter
             ivSearchImage = itemView.findViewById(R.id.ivSearchImage);
             tvSearchTitle = itemView.findViewById(R.id.tvSearchTitle);
             tvSearchDesc = itemView.findViewById(R.id.tvSearchDesc);

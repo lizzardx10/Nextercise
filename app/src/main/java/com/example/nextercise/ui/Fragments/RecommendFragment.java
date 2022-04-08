@@ -16,13 +16,13 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
-import com.example.nextercise.ui.ExerciseActivity;
 import com.example.nextercise.R;
+import com.example.nextercise.ui.ExerciseActivity;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.io.File;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 public class RecommendFragment extends Fragment {
     public static final String TAG = "RecommendFragment";
@@ -102,8 +102,9 @@ public class RecommendFragment extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        int randomNum = ThreadLocalRandom.current().nextInt(0, qCount.count);
-        query.whereEqualTo("exerciseId", randomNum);
+        Random random = new Random();
+        int randomNumb = random.nextInt(qCount.count - 0) + 0;
+        query.whereEqualTo("exerciseId", randomNumb);
         // Execute the find asynchronously
         try {
             Exercise recommended = query.getFirst();
@@ -116,22 +117,5 @@ public class RecommendFragment extends Fragment {
             e.printStackTrace();
             Log.d(TAG, "nothing found");
         }
-//        {
-//            public void done(Exercise recommended, ParseException e) {
-//                // you want to do a check on the ParseException here as well.
-//                if (recommended == null) {
-//                    Log.d(TAG, "nothing found");
-//                } else {
-//                    etExcName.setText(recommended.getString("exerciseName"));
-//                    Glide.with(getApplicationContext()).load(recommended.getExerciseImage().getUrl()).into(ivExcImage);
-//                    etExcDescription.setText(recommended.getString("exerciseDescription"));
-//                    rExercise = recommended;
-//                    Log.d("recommendedExc: ", rExercise.getString("exerciseName"));
-//                }
-//            }
-//        });
-//        Log.d("recommendedExc: ", rExercise.getString("exerciseName") + "");
-            // return rExercise;
-//        }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.nextercise.ui.Fragments;
 
-import static com.parse.Parse.getApplicationContext;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,23 +14,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.nextercise.Exercise;
 import com.example.nextercise.ListAdapter;
+import com.example.nextercise.R;
+import com.example.nextercise.ui.MainActivity;
 import com.parse.FindCallback;
-import com.parse.ParseUser;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
-import com.example.nextercise.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ProfileFragment extends Fragment
 {
@@ -62,10 +55,6 @@ public class ProfileFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        Log.i("tester", String.valueOf(currentUser.getUsername()));
-
         etChangeUsername = view.findViewById(R.id.etChangeUsername);
         etChangePassword = view.findViewById(R.id.etChangePassword);
         btnChangeProfInfo = view.findViewById(R.id.btnChangeProfInfo);
@@ -78,6 +67,7 @@ public class ProfileFragment extends Fragment
                 updateProfileInfo();
             }
         });
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +76,7 @@ public class ProfileFragment extends Fragment
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+                goMainActivity();
             }
         });
 
@@ -157,5 +148,9 @@ public class ProfileFragment extends Fragment
             e.printStackTrace();
             Log.d(TAG, "nothing found");
         }
+    }
+    private void goMainActivity() {
+        Intent i = new Intent(getContext(), MainActivity.class);
+        startActivity(i);
     }
 }

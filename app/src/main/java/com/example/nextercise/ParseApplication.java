@@ -8,13 +8,13 @@ import com.parse.ParseObject;
 
 
 public class ParseApplication extends Application {
-
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Parse.enableLocalDatastore(this);
         //Register your parse models
         ParseObject.registerSubclass(Exercise.class);
+
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("SnUllb3VxCGIqgrM8aphfjiKZZwaLPAhC8dv8seU")

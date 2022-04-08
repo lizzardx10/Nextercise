@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick login button");
-                goLoginActivty();
+                goLoginActivity();
             }
         });
 
@@ -37,18 +37,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick create account button");
-                goRegisterActivty();
+                goRegisterActivity();
             }
         });
 
     }
 
-    private void goLoginActivty() {
+    private void goLoginActivity() {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
-    private void goRegisterActivty() {
+    private void goRegisterActivity() {
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }
